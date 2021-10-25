@@ -36,7 +36,7 @@ La esfera baja por la rampa ya que tiene físicas y el cubo, aunque sea IsTrigge
 
 Ahora vemos al cubo caer ya que le hemos añadido físicas, pero al ser IsTrigger, atraviesa la rampa y el suelo.
 
-##7. La esfera y el cubo tienen físicas y la esfera tiene 10 veces la masa del cubo, se impide la rotación del cubo sobre el plano XZ.
+## 7. La esfera y el cubo tienen físicas y la esfera tiene 10 veces la masa del cubo, se impide la rotación del cubo sobre el plano XZ.
 
 ![2021-10-25 16-53-14](https://user-images.githubusercontent.com/72868069/138731474-a270d066-4daf-40e3-8524-7c38de79ecc0.gif)
 
