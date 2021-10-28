@@ -1,3 +1,5 @@
+# Ejercicio 3
+
 ## 1. Se deben incluir varios cilindros sobre la escena. Cada vez que el objeto jugador colisione con alguno de ellos, deben aumentar su tamaño y el jugador aumentar puntuación.
 
 ![2021-10-28 17-19-08](https://user-images.githubusercontent.com/72868069/139296065-b8e71e3c-701d-48a3-8e9d-59bc148a5fab.gif)
