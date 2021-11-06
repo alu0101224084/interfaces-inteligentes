@@ -2,15 +2,71 @@
 
 ![2021-11-06 19-54-52](https://user-images.githubusercontent.com/72868069/140622244-b25478d4-50fd-437d-9004-546f076792c4.gif)
 
+```c#
+public class ObjectA : MonoBehaviour
+{
+    private Rigidbody rb;
+    private Rigidbody player_rb;
+    private bool show = false;
+    private int strength = 0;
+
+    void Awake() 
+    {
+        rb = GetComponent<Rigidbody>();
+        player_rb = GameObject.Find("Player").GetComponent<Rigidbody>();
+    }
+
+    void Start() 
+    {
+        ObjectB.eventCollisionPlayerWithB += AddStrength;
+        ObjectB.eventCollisionPlayerWithB += ShowMessage;
+    }
+
+    void AddStrength()
+    {
+        strength++;
+    }
+
+    void ShowMessage()
+    {
+        show = true;
+    }
+    
+    void OnGUI()
+    {
+        if (show)
+            GUI.Label(new Rect(10, 10, 500, 50), "Golpeado");
+    }
+}
+```
+
+```c#
+public class ObjectB : MonoBehaviour
+{
+    public delegate void MethodDelegateCollisionPlayerWithB();
+    public static event MethodDelegateCollisionPlayerWithB eventCollisionPlayerWithB;
+    private Rigidbody rb;
+    private Rigidbody player_rb;
+
+    void Awake() 
+    {
+        rb = GetComponent<Rigidbody>();
+        player_rb = GameObject.Find("Player").GetComponent<Rigidbody>();
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            eventCollisionPlayerWithB();
+        }
+    }
+}
+```
+
 ## 2. Cuando el jugador se aproxima a los cilindros de tipo A, los cilindros de tipo B cambian su color y las esferas se orientan hacia un objetivo ubicado en la escena con ese propósito.
 
 ![2021-11-06 20-23-11](https://user-images.githubusercontent.com/72868069/140622860-22faebb9-3e12-4af4-8845-7d0a20f53e5f.gif)
-
-## 3. Implementar un controlador que mueva el objeto con wasd
-
-Ya implementado y mostrado en los gifs anteriores.
-
-## Scripts:
 
 ```c#
 public class ObjectA : MonoBehaviour
@@ -126,6 +182,8 @@ public class SphereRotation : MonoBehaviour
 
 ```
 
+## 3. Implementar un controlador que mueva el objeto con wasd
+
 ```c#
 public class Controller : MonoBehaviour
 {
@@ -146,3 +204,4 @@ public class Controller : MonoBehaviour
 }
 
 ```
+
