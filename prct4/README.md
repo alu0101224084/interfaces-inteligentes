@@ -89,6 +89,8 @@ public class CameraTexture : MonoBehaviour
 }
 ```
 
+En este script, se crea una nueva textura que consiste en la imagen que recibe nuestra cámara y se guarda en una variable global. La cámara se enciende nada más iniciar la escena. La función Explode elimina el cubos y crea 125 cubos pequeños que salen disparados para simular una explosión. Cada uno de ellos toma como textura la entrada de la cámara.
+
 ## Micrófono
 
 ```c#
@@ -135,3 +137,5 @@ public class MicrophoneControl : MonoBehaviour
         }
     }
 }```
+
+El micrófono graba al pulsar la tecla R (de record) y se reproduce el audio al pulsar la tecla P (de play). A continuación, se obtienen 1024 muestras del clip (que se guardan en clipSampleData) y calculamos la media de los volumenes de cada muestra. Si la media es superior a cierto valor, significa que el volumen es alto, por tanto activamos el evento de la explosión del cubo con la cámara.
