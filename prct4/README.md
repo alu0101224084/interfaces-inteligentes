@@ -136,6 +136,7 @@ public class MicrophoneControl : MonoBehaviour
             }
         }
     }
-}```
+}
+```
 
 El micrófono graba al pulsar la tecla R (de record) y se reproduce el audio al pulsar la tecla P (de play). A continuación, se obtienen 1024 muestras del clip (que se guardan en clipSampleData) y calculamos la media de los volumenes de cada muestra. Si la media es superior a cierto valor, significa que el volumen es alto, por tanto activamos el evento de la explosión del cubo con la cámara.
