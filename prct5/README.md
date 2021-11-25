@@ -4,6 +4,10 @@ La escena implementada consiste en un auto-cine con un aparcamiento en el que co
 
 Al aparcar el coche en el hueco de la izquierda, se activará el KeywordRecognizer. En la pantalla del cine aparecerá un texto indicándonos qué palabras se pueden reconocer, entre las cuales se encuentran los colores: rojo, azul, verde y amarillo. Al decir uno de estos 4 colores por el micrófono, el coche cambiará su color al indicado mediante la voz.
 
+[Repositorio Github](https://github.com/alu0101224084/interfaces-inteligentes/tree/main/prct5)
+
+[Video demostración](https://youtu.be/2ZuV7aC4yHQ)
+
 En cambio, si aparcamos el coche a la derecha, comenzará el DictationRecognizer, lo que hará que se vayan imprimiendo en la pantalla del cine las frases que vayamos diciendo.
 
 # Scripts
@@ -92,7 +96,7 @@ public class Keywords : MonoBehaviour
 }
 ```
 
-Primero se inicia el KeywordRecognizer y se definen las palabras que queremos que reconozca. Mediante el uso de delegados, se activa el KeywordRecognizer al entrar en una determinada zona, y se desactiva al salir de ella. Después se añade la función OnPhraseRecognized al KeywordRecognizer, función en la que definiremos el comportamiento del programa en función de las palabras que son reconocidas (escribirla en la pantalla del autocine y, además, cambiar el material del coche en caso de que la palabra sea un color.
+Primero se inicia el KeywordRecognizer y se definen las palabras que queremos que reconozca. Mediante el uso de delegados, gestionado por la clase GameController, se activa el KeywordRecognizer al entrar en una determinada zona, y se desactiva al salir de ella. Después se añade la función OnPhraseRecognized al KeywordRecognizer, función en la que definiremos el comportamiento del programa en función de las palabras que son reconocidas (escribirla en la pantalla del autocine y, además, cambiar el material del coche en caso de que la palabra sea un color.
 
 ## Dictation Recognizer
 
@@ -166,4 +170,4 @@ public class Dictation : MonoBehaviour
 }
 ```
 
-
+El DictationRecognizer también se gestiona mediante delegados (GameController), activándolo cuando se entra en cierto cubo y desactivándolo al salir. Se crea el objeto DictationRecognizer y se añaden dos funciones: una es DictationResult, que se ejecuta cuando se termina de reconocer una oración, la cual recibe el texto que se ha entendido y el nivel de exactitud; y la otra es DictationHypothesis, que se ejecuta cuando se reconoce un sonido. Al terminar de reconocer una frase, se escribe en la pantalla del autocine la frase que se ha escuchado.
