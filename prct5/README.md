@@ -91,3 +91,75 @@ public class Keywords : MonoBehaviour
 ```
 
 Primero se inicia el KeywordRecognizer y se definen las palabras que queremos que reconozca. Mediante el uso de delegados, se activa el KeywordRecognizer al entrar en una determinada zona, y se desactiva al salir de ella. Después se añade la función OnPhraseRecognized al KeywordRecognizer, función en la que definiremos el comportamiento del programa en función de las palabras que son reconocidas (escribirla en la pantalla del autocine y, además, cambiar el material del coche en caso de que la palabra sea un color.
+
+````c#
+public class Dictation : MonoBehaviour
+{
+    [SerializeField]
+    private TextMesh m_Hypotheses;
+
+    [SerializeField]
+    private TextMesh m_Recognitions;
+
+    private DictationRecognizer m_DictationRecognizer;
+
+    void Start()
+    {
+        GameManager.eventDictationEnter += startRecognizing;
+        GameManager.eventDictationExit += stopRecognizing;
+        m_Hypotheses = GameObject.FindGameObjectWithTag("Pantalla").GetComponent<TextMesh>();
+        m_Recognitions = m_Hypotheses;
+    }
+
+    void OnDestroy()
+    {
+        m_DictationRecognizer.Dispose();
+    }
+
+    void startRecognizing()
+    {
+        Debug.Log("DictationRecognizer ha comenzado");
+        createRecognizer();
+        m_DictationRecognizer.Start();
+        m_Hypotheses.text = "Dictation recognizer activado\n";
+    }
+
+    void stopRecognizing()
+    {
+        Debug.Log("DictationRecognizer ha parado");
+        m_DictationRecognizer.Stop();
+        m_DictationRecognizer.Dispose();
+    }
+
+    void createRecognizer()
+    {
+        m_DictationRecognizer = new DictationRecognizer();
+
+        m_DictationRecognizer.DictationResult += (text, confidence) =>
+        {
+            Debug.LogFormat("Dictation result: {0}", text);
+            m_Recognitions.text += "Resultado: " + text + "\n";
+        };
+
+        m_DictationRecognizer.DictationHypothesis += (text) =>
+        {
+            Debug.LogFormat("Dictation hypothesis: {0}", text);
+            m_Hypotheses.text = text + "\n";
+        };
+
+        m_DictationRecognizer.DictationComplete += (completionCause) =>
+        {
+            if (completionCause != DictationCompletionCause.Complete)
+                Debug.LogErrorFormat("Dictation completed unsuccessfully: {0}.", completionCause);
+            m_Hypotheses.text = "";
+        };
+
+        m_DictationRecognizer.DictationError += (error, hresult) =>
+        {
+            Debug.LogErrorFormat("Dictation error: {0}; HResult = {1}.", error, hresult);
+        };
+    }
+}
+```
+
+
