@@ -8,6 +8,8 @@ En cambio, si aparcamos el coche a la derecha, comenzará el DictationRecognizer
 
 # Scripts
 
+## Keyword Recognizer
+
 ```c#
 public class Keywords : MonoBehaviour
 {
@@ -92,7 +94,9 @@ public class Keywords : MonoBehaviour
 
 Primero se inicia el KeywordRecognizer y se definen las palabras que queremos que reconozca. Mediante el uso de delegados, se activa el KeywordRecognizer al entrar en una determinada zona, y se desactiva al salir de ella. Después se añade la función OnPhraseRecognized al KeywordRecognizer, función en la que definiremos el comportamiento del programa en función de las palabras que son reconocidas (escribirla en la pantalla del autocine y, además, cambiar el material del coche en caso de que la palabra sea un color.
 
-````c#
+## Dictation Recognizer
+
+```c#
 public class Dictation : MonoBehaviour
 {
     [SerializeField]
