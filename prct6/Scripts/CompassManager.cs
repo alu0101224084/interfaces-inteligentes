@@ -54,7 +54,6 @@ public class CompassManage : MonoBehaviour
             
         if (Input.location.isEnabledByUser)
         {
-            Debug.Log("nos movemos pibe XD");
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, Input.compass.trueHeading, transform.eulerAngles.z), Time.deltaTime * 7);
             Debug.Log(Input.compass.magneticHeading);
         }
